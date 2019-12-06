@@ -1,0 +1,1 @@
+[![Coverage Status](https://coveralls.io/repos/github/TintoEdoardo/Assignment-2/badge.svg)](https://coveralls.io/github/TintoEdoardo/Assignment-2)
