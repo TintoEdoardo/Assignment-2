@@ -1,0 +1,17 @@
+os: osx
+group: edge
+language: java
+sudo: required
+jdk:
+  - openjdk-ea
+cache:
+  directories:
+    - $HOME/.m2
+before_install:
+  - cd sandwich-shop-manager
+script:
+  - mvn clean install
+  - mvn clean verify
+
+after_success:
+- mvn clean test jacoco:report coveralls:report
