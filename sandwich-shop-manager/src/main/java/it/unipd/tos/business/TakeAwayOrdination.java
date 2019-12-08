@@ -42,7 +42,7 @@ public class TakeAwayOrdination implements TakeAwayBill {
  
  public MenuItem FindLessExpensiveBurger(List<MenuItem> itemsOrdered)
  {
-	 MenuItem cheapestBurger;
+  MenuItem cheapestBurger;
   ArrayList<MenuItem> burgerList = FindAllBurgers(itemsOrdered);
   if(burgerList.isEmpty())
   {
@@ -70,7 +70,10 @@ public class TakeAwayOrdination implements TakeAwayBill {
   
   return SumAllElementsPrice(itemsOrdered) - discount;
   }
-  else return SumAllElementsPrice(itemsOrdered);
+  else
+  {
+   return SumAllElementsPrice(itemsOrdered);
+  }
  }
  
  public double DiscoutOver50Euros(List<MenuItem> itemsOrdered) {
@@ -83,6 +86,14 @@ public class TakeAwayOrdination implements TakeAwayBill {
   double actualPrice = previousPrice - discount;
 
   return actualPrice;
+ }
+ 
+ public void OrderValidation(List<MenuItem> itemsOrdered) 
+    throws TakeAwayBillException{
+  if(itemsOrdered.size() > 30)
+  {
+   throw new TakeAwayBillException("Too many items");
+  }
  }
  
  @Override

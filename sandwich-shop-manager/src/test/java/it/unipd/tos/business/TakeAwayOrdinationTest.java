@@ -1,6 +1,8 @@
 package it.unipd.tos.business;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import it.unipd.tos.model.MenuItem;
 import it.unipd.tos.model.MenuItem.elementType;
 
@@ -172,6 +174,45 @@ public class TakeAwayOrdinationTest {
  }
  
  //-------- Fourth Issue --------\\
+ @Test
+ public void OrderValidation_TooMuchItems_Exception() {
+  TakeAwayOrdination ordination = new TakeAwayOrdination();
+  
+  ArrayList<MenuItem> listItem = new ArrayList<MenuItem>();
+  
+  MenuItem tmp = new MenuItem();
+  
+  for(int i = 0; i < 31; i++) {
+   listItem.add(tmp);
+  }
+  
+  try {
+   ordination.OrderValidation(listItem);
+  }
+  catch(TakeAwayBillException exception)
+  {
+   assertEquals("Too many items", exception.errorMessage);
+  }
+ }
  
+ @Test
+ public void OrderValidation_LessThe30Items_NoOutput() {
+  TakeAwayOrdination ordination = new TakeAwayOrdination();
+  
+  ArrayList<MenuItem> listItem = new ArrayList<MenuItem>();
+  
+  MenuItem water = new MenuItem();
+  
+  listItem.add(water);
+  
+  boolean test = false;
+  try {
+   ordination.OrderValidation(listItem);
+   test = true;
+  }
+  catch(TakeAwayBillException exception) {}
+  
+  assertTrue(test);
+ }
  
 }
