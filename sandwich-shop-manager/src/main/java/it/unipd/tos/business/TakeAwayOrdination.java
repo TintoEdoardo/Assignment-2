@@ -96,6 +96,18 @@ public class TakeAwayOrdination implements TakeAwayBill {
   }
  }
  
+ public double AddCommission(List<MenuItem> itemsOrdered) {
+
+  double sumOfAllPrice = SumAllElementsPrice(itemsOrdered);
+
+  if(sumOfAllPrice < 10)
+  {
+   sumOfAllPrice = sumOfAllPrice + 0.5;
+  }
+  
+  return sumOfAllPrice;
+ }
+ 
  @Override
  public double getOrderPrice(List<MenuItem> itemsOrdered)
    throws TakeAwayBillException {

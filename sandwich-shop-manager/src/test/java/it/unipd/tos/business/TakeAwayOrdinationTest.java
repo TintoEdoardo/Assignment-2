@@ -215,4 +215,35 @@ public class TakeAwayOrdinationTest {
   assertTrue(test);
  }
  
+ //-------- Fifth Issue --------\\
+ @Test
+ public void AddCommission_LessThen10Euros_AddCommission() {
+  TakeAwayOrdination ordination = new TakeAwayOrdination();
+  
+  ArrayList<MenuItem> listItem = new ArrayList<MenuItem>();
+  
+  MenuItem water = new MenuItem();
+  
+  listItem.add(water);
+  
+  double ordinationPrice = ordination.AddCommission(listItem);
+  
+  assertEquals(0.5, ordinationPrice, 0);
+ }
+ 
+ @Test
+ public void AddCommission_MoreThen10Euros_ordinationPrice() {
+  TakeAwayOrdination ordination = new TakeAwayOrdination();
+  
+  ArrayList<MenuItem> listItem = new ArrayList<MenuItem>();
+  
+  MenuItem angusPremium = new MenuItem(elementType.Panini, "Angus Premium", 20.0);
+  
+  listItem.add(angusPremium);
+  
+  double ordinationPrice = ordination.AddCommission(listItem);
+  
+  assertEquals(20.0, ordinationPrice, 0);
+ }
+ 
 }
