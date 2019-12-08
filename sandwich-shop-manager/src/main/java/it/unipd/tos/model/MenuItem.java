@@ -12,6 +12,12 @@ public class MenuItem {
   price = 0;
  }
  
+ public MenuItem(elementType t, String n, double p) {
+  itemType = t;
+  name = n;
+  price = p;
+ }
+ 
  public enum elementType {
   Panini,
   Fritti,

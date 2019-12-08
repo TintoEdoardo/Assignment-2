@@ -14,4 +14,12 @@ public class MenuItemTest {
 
   assertNotNull(item);
  }
+ 
+ @Test
+ public void MenuItem_DefaultConstructor_Succes() {
+  MenuItem item = new MenuItem(elementType.Bevande, "pepsi", 1.5);
+  
+  assertNotNull(item);
+ }
+ 
 }
