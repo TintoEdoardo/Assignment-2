@@ -66,11 +66,23 @@ public class TakeAwayOrdination implements TakeAwayBill {
   ArrayList<MenuItem> burgerList = FindAllBurgers(itemsOrdered);
   if(burgerList.size() > 4)
   {
-	  double discount = FindLessExpensiveBurger(burgerList).price / 2;
-	  
-	  return SumAllElementsPrice(itemsOrdered) - discount;
+  double discount = FindLessExpensiveBurger(burgerList).price / 2;
+  
+  return SumAllElementsPrice(itemsOrdered) - discount;
   }
   else return SumAllElementsPrice(itemsOrdered);
+ }
+ 
+ public double DiscoutOver50Euros(List<MenuItem> itemsOrdered) {
+  double previousPrice = SumAllElementsPrice(itemsOrdered);
+  double discount = 0;
+  if(previousPrice > 50)
+  {
+   discount = previousPrice / 10;
+  }
+  double actualPrice = previousPrice - discount;
+
+  return actualPrice;
  }
  
  @Override

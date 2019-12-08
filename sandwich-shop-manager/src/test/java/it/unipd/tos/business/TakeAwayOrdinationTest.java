@@ -10,6 +10,7 @@ import it.unipd.tos.business.exception.TakeAwayBillException;
 
 public class TakeAwayOrdinationTest {
 
+ //-------- First Issue --------\\
  @Test
  public void SumOfElements_EmptyList_ReturnZero() {
  TakeAwayOrdination ordination = new TakeAwayOrdination();
@@ -35,6 +36,8 @@ public class TakeAwayOrdinationTest {
   double recipie = ordination.SumAllElementsPrice(listItem);	
   assertEquals(1.0, recipie, 0);
  }
+ 
+ //-------- Second Issue --------\\
  
  @Test
  public void FindAllBurgers_NoBurgerList_ReturnEmptyList() {
@@ -133,4 +136,42 @@ public class TakeAwayOrdinationTest {
   
   assertEquals(0.0, ordinationPriceDiscounted, 0);
  }
+ 
+ //-------- Third Issue --------\\
+ 
+ @Test
+ public void DiscountOver50Euros_LessThen50_SumOfAlPrice() {
+  TakeAwayOrdination ordination = new TakeAwayOrdination();
+	  
+  ArrayList<MenuItem> listItem = new ArrayList<MenuItem>();
+  
+  MenuItem angusPremium = new MenuItem(elementType.Panini, "Angus Premium", 20.0);
+  
+  listItem.add(angusPremium);
+  
+  double ordinationPriceNoDiscounted = ordination.DiscoutOver50Euros(listItem);
+  
+  assertEquals(20.0, ordinationPriceNoDiscounted, 0);
+ }
+ 
+ @Test
+ public void DiscountOver50Euros_MoreThen50_AppliedDiscount() {
+  TakeAwayOrdination ordination = new TakeAwayOrdination();
+	  
+  ArrayList<MenuItem> listItem = new ArrayList<MenuItem>();
+  
+  MenuItem angusPremium = new MenuItem(elementType.Panini, "Angus Premium", 20.0);
+  MenuItem fritturaImperiale = new MenuItem(elementType.Fritti, "Frittura Imperiale", 35.0);
+  
+  listItem.add(angusPremium);
+  listItem.add(fritturaImperiale);
+  
+  double ordinationPriceDiscounted = ordination.DiscoutOver50Euros(listItem);
+  
+  assertEquals(49.5, ordinationPriceDiscounted, 0);
+ }
+ 
+ //-------- Fourth Issue --------\\
+ 
+ 
 }
