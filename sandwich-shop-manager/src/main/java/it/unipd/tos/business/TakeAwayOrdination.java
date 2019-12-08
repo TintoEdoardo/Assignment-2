@@ -76,7 +76,7 @@ public class TakeAwayOrdination implements TakeAwayBill {
   }
  }
  
- public double DiscoutOver50Euros(List<MenuItem> itemsOrdered) {
+ public double DiscountOver50Euros(List<MenuItem> itemsOrdered) {
   double previousPrice = SumAllElementsPrice(itemsOrdered);
   double discount = 0;
   if(previousPrice > 50)
@@ -112,7 +112,17 @@ public class TakeAwayOrdination implements TakeAwayBill {
  public double getOrderPrice(List<MenuItem> itemsOrdered)
    throws TakeAwayBillException {
  
- return 0;
+ OrderValidation(itemsOrdered);
+ 
+ double receipt = 0;
+ 
+ receipt = AddCommission(itemsOrdered);
+ 
+ receipt = ApplyDiscount(itemsOrdered);
+ 
+ receipt = DiscountOver50Euros(itemsOrdered);
+ 
+ return receipt;
  }
 
 }

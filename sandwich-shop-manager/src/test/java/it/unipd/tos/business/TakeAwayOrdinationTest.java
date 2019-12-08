@@ -1,7 +1,6 @@
 package it.unipd.tos.business;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import it.unipd.tos.model.MenuItem;
 import it.unipd.tos.model.MenuItem.elementType;
@@ -151,7 +150,7 @@ public class TakeAwayOrdinationTest {
   
   listItem.add(angusPremium);
   
-  double ordinationPriceNoDiscounted = ordination.DiscoutOver50Euros(listItem);
+  double ordinationPriceNoDiscounted = ordination.DiscountOver50Euros(listItem);
   
   assertEquals(20.0, ordinationPriceNoDiscounted, 0);
  }
@@ -168,7 +167,7 @@ public class TakeAwayOrdinationTest {
   listItem.add(angusPremium);
   listItem.add(fritturaImperiale);
   
-  double ordinationPriceDiscounted = ordination.DiscoutOver50Euros(listItem);
+  double ordinationPriceDiscounted = ordination.DiscountOver50Euros(listItem);
   
   assertEquals(49.5, ordinationPriceDiscounted, 0);
  }
@@ -244,6 +243,30 @@ public class TakeAwayOrdinationTest {
   double ordinationPrice = ordination.AddCommission(listItem);
   
   assertEquals(20.0, ordinationPrice, 0);
+ }
+ 
+ //-------- Release --------\\
+ @Test
+ public void getOrderPrice_MoreThen50Eurs_NoException() {
+  TakeAwayOrdination ordination = new TakeAwayOrdination();
+  
+  ArrayList<MenuItem> listItem = new ArrayList<MenuItem>();
+  
+  MenuItem angusPremium = new MenuItem(elementType.Panini, "Angus Premium", 20.0);
+  
+  for(int i = 0; i < 5; i++)
+  {
+   listItem.add(angusPremium);
+  }
+  
+  double receipt = 0;
+  
+  try {
+   receipt = ordination.getOrderPrice(listItem);
+  }
+  catch(TakeAwayBillException exception) {}
+  
+  assertEquals(90.0, receipt, 0);
  }
  
 }
